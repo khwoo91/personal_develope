@@ -31,14 +31,14 @@ button{
 
 /* 헤더 */
 header{
-  position: relative;
+  position: sticky;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
-  width: 100%;
-  padding: 0px 20px;
+  width: 1280px;
   height: 102px;
+  padding: 0px 20px;
 }
 header h1 a{
   width: 130px;
@@ -133,7 +133,7 @@ header nav ul.main.list li.sub > ul li{
   padding: 4px 8px;
   border-radius: 20px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.5s;
 }
 header nav ul.main.list li.sub > ul li:hover{
   background-color: #25c18d;
@@ -171,9 +171,10 @@ header nav section.nav_section img{
 
 
 /* 메인 */
-
 main{
+  /* position: relative; */
   width: 100%;
+  z-index: 0;
 }
 main > div{
   margin: 0 auto;
@@ -218,7 +219,7 @@ main .cs_cs_center_sec .sec_01 .eco_cs{
   width: 380px;
   height: 172px;
   padding: 40px;
-  background-color: #f7f7f7;
+  background-color: #f9fafc;
   border-radius: 15px;
   /* outline: 1px solid red; */
 }
@@ -235,7 +236,7 @@ main .cs_cs_center_sec .sec_01 .service{
   gap: 10px;
   width: 600px;
   height: 172px;
-  border: 3px solid #eee;
+  border: 1px solid #ddd;
   border-radius: 15px;
   padding: 30px 40px;
 }
