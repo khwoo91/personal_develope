@@ -149,7 +149,7 @@ header nav section.nav_section{
   translate: -50%;
   width: 100%;
   height: 208px;
-  border-top: 2px solid #ddd;
+  border-top: 1px solid #ddd;
   background-color: #fff;
   box-shadow: 5px 10px 10px #f0f0f0;
 }
