@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<title>GGANG GAME</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../../../lib/css/common.css">
+	<link rel="stylesheet" type="text/css" href="./css/game.css">
+</head>
+<body>
+	<div class="game_app">
+		<div class="sky"></div>
+		<div class="game">
+			<div class="hero_box">
+				<span class="level_up"></span>
+				<div class="hero"></div>
+			</div>
+		</div>
+		<div class="game_info">
+			<div class="hero_state">
+				<figure class="hero_img">
+					<img src="../../../lib/images/ninja_profile.png" alt="">
+					<div class="level_box">
+						<span>LV.</span>
+						<strong>1</strong>
+					</div>
+				</figure>
+				<div class="state_box">
+					<div class="hp">
+						<span></span>
+					</div>
+					<div class="exp">
+						<span></span>
+					</div>
+				</div>
+			</div>
+			<div class="score_box">0</div>
+		</div>
+		<div class="game_over">
+			<p>GAME OVER</p>
+		</div>
+		<div class="quest_modal">
+			<div class="inner_box">
+				<div class="quest_talk">
+					<figure class="npc_img">
+						<img src="../../lib/images/npc.png">
+					</figure>
+					<p>
+						마을에 몬스터가 출몰해 주민들을 좀비로 만들고 있어.. 몬스터를 사냥해 주민을 구하고 <span>레벨을 5이상</span>으로 만들어 힘을 증명한다면 좀비왕을 물리칠 수 있도록 내 힘을 빌려줄게!!
+					</p>
+				</div>
+				<span class="close">닫기 Enter</span>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="./js/monster.js" charset="utf-8"></script>
+	<script type="text/javascript" src="./js/class.js" charset="utf-8"></script>
+	<script type="text/javascript" src="./js/game.js" charset="utf-8"></script>
+</body>
+
+</html>

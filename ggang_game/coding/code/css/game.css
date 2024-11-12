@@ -1,0 +1,56 @@
+.game_app {
+  position: relative;
+  height: 100vh;
+}
+
+.game_app .game {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  ;
+  z-index: 10;
+}
+
+@keyframes hero_idle {
+  from {background-position-x: 0px;}
+  to {background-position-x: -3770px;}
+}
+@keyframes hero_run {
+  from {background-position-x: 0px;}
+  to {background-position-x: -3770px;}
+}
+@keyframes hero_attack {
+  from {background-position-x: 0px;}
+  to {background-position-x: -3770px;}
+}
+
+
+.hero_box {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 377px;
+  height: 458px;
+  z-index: 100;
+}
+
+.hero_box .hero {
+  height: 100%;
+  background-image: url(../../../lib/images/ninja_idle.png);
+  background-size: 3770px 458px;
+  animation: hero_idle 0.7s infinite steps(10);
+}
+.hero_box .hero.flip{transform: rotateY(180deg);}
+
+
+.hero_box .hero.run {
+  background-image: url(../../../lib/images/ninja_run.png);
+  animation: hero_run 0.7s infinite steps(10);
+}
+.hero_box .hero.attack {
+  background-image: url(../../../lib/images/ninja_attack.png);
+  animation: hero_attack 0.5s infinite steps(10);
+}
