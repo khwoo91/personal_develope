@@ -54,3 +54,13 @@
   background-image: url(../../../lib/images/ninja_attack.png);
   animation: hero_attack 0.5s infinite steps(10);
 }
+
+.hero_bullet {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 90;
+  width: 160px;
+  height: 32px;
+  background: url(../../../lib/images/hero_bullet.png) center / cover no-repeat;
+}
