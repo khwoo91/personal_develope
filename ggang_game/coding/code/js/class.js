@@ -10,6 +10,7 @@ class Hero {
     if (key.keyDown['left']) {
       this.el.classList.add('run')
       this.el.classList.add('flip')
+
       this.moveX = this.moveX - this.speed;
     }
     else if (key.keyDown['right']) {
@@ -77,5 +78,13 @@ class Bullet {
     console.log(this.distance);
     this.distance += this.speed;
     this.el.style.transform = `translate(${this.distance}px, ${this.y}px)`;
+  }
+  position() {
+    return {
+      left: this.el.getBoundingClientRect().left,
+      right: this.el.getBoundingClientRect().right,
+      top: gameProp.screenHeight - this.el.getBoundingClientRect().top,
+      bottom: gameProp.screenHeight - this.el.getBoundingClientRect().top - this.el.getBoundingClientRect().height
+    }
   }
 }

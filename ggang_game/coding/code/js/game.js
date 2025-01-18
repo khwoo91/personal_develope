@@ -18,6 +18,7 @@ const bulletComProp = {
   arr: []
 }
 
+
 const renderGame = () => {
   hero.keyMotion();
 
