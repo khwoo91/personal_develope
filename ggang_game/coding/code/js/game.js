@@ -8,14 +8,23 @@ const key = {
   }
 };
 
-const gameProp = {
-  screenWidth: window.innerWidth,
-  screenHeight: window.innerHeight
-};
 
+
+const allMonsterComProp = {
+  arr: []
+}
 const bulletComProp = {
   launch: false,
   arr: []
+};
+
+
+
+
+
+const gameProp = {
+  screenWidth: window.innerWidth,
+  screenHeight: window.innerHeight
 };
 
 const gameBackground = {
@@ -28,8 +37,8 @@ const renderGame = () => {
 
   bulletComProp.arr.forEach((arr, i) => {
     arr.moveBullet();
-    console.log('text', bulletComProp.arr.length);
-    
+    // console.log('text', bulletComProp.arr.length);
+
   });
   window.requestAnimationFrame(renderGame);
 };
@@ -67,11 +76,11 @@ const loadImg = () => {
 
 
 let hero;
-let monster;
 
 const init = () => {
   hero = new Hero('.hero');
-  monster = new Monster();
+  allMonsterComProp.arr[0] = new Monster(700, 7777);
+  allMonsterComProp.arr[1] = new Monster(1500, 5555);
   loadImg();
   windowEvent();
   renderGame();

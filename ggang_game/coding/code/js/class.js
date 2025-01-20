@@ -4,7 +4,7 @@ class Hero {
     this.moveX = 0;
     this.speed = 11;
     this.direction = 'right';
-    // console.log(window.innerHeight - this.el.getBoundingClientRect().top - this.el.getBoundingClientRect().height);
+    this.attackDamage = 1000;
   }
 
   keyMotion() {
@@ -25,7 +25,6 @@ class Hero {
       if (!bulletComProp.launch) {
         this.el.classList.add('attack');
         bulletComProp.arr.push(new Bullet());
-
         bulletComProp.launch = true;
       }
     }
@@ -50,6 +49,7 @@ class Hero {
       bottom: gameProp.screenHeight - this.el.getBoundingClientRect().top - this.el.getBoundingClientRect().height
     }
   }
+
   size() {
     return {
       width: this.el.offsetWidth,
@@ -72,6 +72,7 @@ class Bullet {
     this.bulletDirection = 'right';
     this.init();
   }
+
   init() {
     this.bulletDirection = hero.direction === 'left' ? 'left' : 'right';
     this.x = this.bulletDirection === 'right' ? hero.moveX + hero.size().width / 2 : hero.moveX - hero.size().width / 2;
@@ -80,6 +81,7 @@ class Bullet {
     this.el.style.transform = `translate(${this.x}px, ${this.y}px)`;
     this.parentNode.appendChild(this.el);
   }
+
   moveBullet() {
     let setRotate = '';
     if (this.bulletDirection === 'left') {
@@ -92,6 +94,7 @@ class Bullet {
     this.el.style.transform = `translate(${this.distance}px, ${this.y}px) ${setRotate}`;
     this.crashBullet();
   }
+
   position() {
     return {
       left: this.el.getBoundingClientRect().left,
@@ -100,13 +103,16 @@ class Bullet {
       bottom: gameProp.screenHeight - this.el.getBoundingClientRect().top - this.el.getBoundingClientRect().height
     }
   }
+
   crashBullet() {
-    if (this.position().left > monster.position().left && this.position().right < monster.position().right) {
-      for (let i = 0; i < bulletComProp.arr.length; i++) {
-        if (bulletComProp.arr[i] === this) {
-          bulletComProp.arr.splice(i, 1);
-          this.el.remove();
-          console.log(bulletComProp.arr);
+    for (let j = 0; j < allMonsterComProp.arr.length; j++) {
+      if (this.position().left > allMonsterComProp.arr[j].position().left && this.position().right < allMonsterComProp.arr[j].position().right) {
+        for (let i = 0; i < bulletComProp.arr.length; i++) {
+          if (bulletComProp.arr[i] === this) {
+            bulletComProp.arr.splice(i, 1);
+            this.el.remove();
+            allMonsterComProp.arr[j].updateHp(j);
+          }
         }
       }
     }
@@ -115,7 +121,6 @@ class Bullet {
         if (bulletComProp.arr[i] === this) {
           bulletComProp.arr.splice(i, 1);
           this.el.remove();
-          console.log(bulletComProp.arr);
         }
       }
     }
@@ -126,19 +131,27 @@ class Bullet {
 
 
 class Monster {
-  constructor() {
+  constructor(positionX, hp) {
     this.parentNode = document.querySelector('.game');
     this.el = document.createElement('div');
     this.el.className = 'monster_box';
     this.elChildren = document.createElement('div')
     this.elChildren.className = 'monster';
+    this.hpNode = document.createElement('div');
+    this.hpNode.className = 'hp';
+    this.hpValue = hp;
+    this.hpTextNode = document.createTextNode(this.hpValue);
+    this.positionX = positionX;
 
     this.init();
   }
 
   init() {
+    this.hpNode.appendChild(this.hpTextNode);
+    this.el.appendChild(this.hpNode);
     this.el.appendChild(this.elChildren);
     this.parentNode.appendChild(this.el);
+    this.el.style.left = this.positionX + 'px';
   }
 
   position() {
@@ -148,5 +161,21 @@ class Monster {
       top: gameProp.screenHeight - this.el.getBoundingClientRect().top,
       bottom: gameProp.screenHeight - this.el.getBoundingClientRect().top - this.el.getBoundingClientRect().height
     }
+  }
+
+  updateHp(index) {
+    this.hpValue = Math.max(0, this.hpValue - hero.attackDamage);
+    this.el.children[0].innerText = this.hpValue;
+
+    if (this.hpValue === 0) {
+      this.dead(index);
+    }
+  }
+
+  dead(index) {
+    this.el.classList.add('remove');
+    setTimeout(() => { this.el.remove(); }, 200);
+    allMonsterComProp.arr.splice(index, 1);
+    console.log(allMonsterComProp.arr);
   }
 }
