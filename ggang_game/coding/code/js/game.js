@@ -28,6 +28,8 @@ const renderGame = () => {
 
   bulletComProp.arr.forEach((arr, i) => {
     arr.moveBullet();
+    console.log('text', bulletComProp.arr.length);
+    
   });
   window.requestAnimationFrame(renderGame);
 };
@@ -39,11 +41,11 @@ const setGameBackground = () => {
 
 const windowEvent = () => {
   window.addEventListener('keydown', e => {
-    key.keyDown[key.keyValue[e.which]] = true
+    key.keyDown[key.keyValue[e.which]] = true;
   });
 
   window.addEventListener("keyup", e => {
-    key.keyDown[key.keyValue[e.which]] = false
+    key.keyDown[key.keyValue[e.which]] = false;
   });
 
   window.addEventListener('resize', e => {
@@ -64,11 +66,12 @@ const loadImg = () => {
 };
 
 
-
-
 let hero;
+let monster;
+
 const init = () => {
   hero = new Hero('.hero');
+  monster = new Monster();
   loadImg();
   windowEvent();
   renderGame();

@@ -87,3 +87,28 @@
   background: url(../../../lib/images/hero_bullet.png) center / cover no-repeat;
   will-change: transform;
 }
+
+
+.monster_box{
+  position: absolute;
+  left: 700px;
+  bottom: 0;
+  width: 280px;
+  height: 294px;
+  z-index: 90;
+  will-change: transform;
+}
+.monster_box .monster {
+  height: 100%;
+  background-image: url(../../../lib/images/monster/monster_green_run.png);
+  background-size: 2242px 294px;
+  background-repeat: no-repeat;
+  animation: monster_run 1s infinite steps(8);
+}
+
+
+
+@keyframes monster_run {
+  from {background-position-x: 0px;}
+  to {background-position-x: -2242px;}
+}

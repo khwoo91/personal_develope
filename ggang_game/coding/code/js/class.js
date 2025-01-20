@@ -10,20 +10,20 @@ class Hero {
   keyMotion() {
     if (key.keyDown['left']) {
       this.direction = 'left';
-      this.el.classList.add('run')
-      this.el.classList.add('flip')
+      this.el.classList.add('run');
+      this.el.classList.add('flip');
       this.moveX = this.moveX <= 0 ? 0 : this.moveX - this.speed;
     }
     else if (key.keyDown['right']) {
       this.direction = 'right';
-      this.el.classList.add('run')
-      this.el.classList.remove('flip')
+      this.el.classList.add('run');
+      this.el.classList.remove('flip');
       this.moveX = this.moveX + this.speed;
     }
 
     if (key.keyDown['attack']) {
       if (!bulletComProp.launch) {
-        this.el.classList.add('attack')
+        this.el.classList.add('attack');
         bulletComProp.arr.push(new Bullet());
 
         bulletComProp.launch = true;
@@ -31,15 +31,15 @@ class Hero {
     }
 
     if (!key.keyDown['left'] && !key.keyDown['right']) {
-      this.el.classList.remove('run')
+      this.el.classList.remove('run');
     }
 
     if (!key.keyDown['attack']) {
-      this.el.classList.remove('attack')
+      this.el.classList.remove('attack');
       bulletComProp.launch = false;
     }
 
-    this.el.parentNode.style.transform = `translateX(${this.moveX}px)`
+    this.el.parentNode.style.transform = `translateX(${this.moveX}px)`;
   }
 
   position() {
@@ -62,7 +62,7 @@ class Hero {
 
 class Bullet {
   constructor() {
-    this.parentNode = document.querySelector('.game')
+    this.parentNode = document.querySelector('.game');
     this.el = document.createElement('div');
     this.el.className = 'hero_bullet';
     this.x = 0;
@@ -88,7 +88,7 @@ class Bullet {
     } else {
       this.distance += this.speed;
     }
-    
+
     this.el.style.transform = `translate(${this.distance}px, ${this.y}px) ${setRotate}`;
     this.crashBullet();
   }
@@ -101,8 +101,52 @@ class Bullet {
     }
   }
   crashBullet() {
+    if (this.position().left > monster.position().left && this.position().right < monster.position().right) {
+      for (let i = 0; i < bulletComProp.arr.length; i++) {
+        if (bulletComProp.arr[i] === this) {
+          bulletComProp.arr.splice(i, 1);
+          this.el.remove();
+          console.log(bulletComProp.arr);
+        }
+      }
+    }
     if (this.position().left > gameProp.screenWidth || this.position().right < 0) {
-      this.el.remove()
+      for (let i = 0; i < bulletComProp.arr.length; i++) {
+        if (bulletComProp.arr[i] === this) {
+          bulletComProp.arr.splice(i, 1);
+          this.el.remove();
+          console.log(bulletComProp.arr);
+        }
+      }
+    }
+  }
+}
+
+
+
+
+class Monster {
+  constructor() {
+    this.parentNode = document.querySelector('.game');
+    this.el = document.createElement('div');
+    this.el.className = 'monster_box';
+    this.elChildren = document.createElement('div')
+    this.elChildren.className = 'monster';
+
+    this.init();
+  }
+
+  init() {
+    this.el.appendChild(this.elChildren);
+    this.parentNode.appendChild(this.el);
+  }
+
+  position() {
+    return {
+      left: this.el.getBoundingClientRect().left,
+      right: this.el.getBoundingClientRect().right,
+      top: gameProp.screenHeight - this.el.getBoundingClientRect().top,
+      bottom: gameProp.screenHeight - this.el.getBoundingClientRect().top - this.el.getBoundingClientRect().height
     }
   }
 }
