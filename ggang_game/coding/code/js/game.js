@@ -24,7 +24,8 @@ const bulletComProp = {
 
 const gameProp = {
   screenWidth: window.innerWidth,
-  screenHeight: window.innerHeight
+  screenHeight: window.innerHeight,
+  gameOver : false
 };
 
 const gameBackground = {
@@ -37,11 +38,20 @@ const renderGame = () => {
 
   bulletComProp.arr.forEach((arr, i) => {
     arr.moveBullet();
-    // console.log('text', bulletComProp.arr.length);
-
   });
+  allMonsterComProp.arr.forEach((arr, i) => {
+    arr.moveMonster();
+  })
+
   window.requestAnimationFrame(renderGame);
 };
+
+const endGame = () =>{
+  gameProp.gameOver = true;
+  key.keyDown.left = false;
+  key.keyDown.right = false;
+  document.querySelector('.game_over').classList.add('active');
+}
 
 const setGameBackground = () => {
   let parallaxValue = Math.min(0, (hero.moveX - gameProp.screenWidth / 3) * -1);
@@ -50,7 +60,7 @@ const setGameBackground = () => {
 
 const windowEvent = () => {
   window.addEventListener('keydown', e => {
-    key.keyDown[key.keyValue[e.which]] = true;
+    if(!gameProp.gameOver) key.keyDown[key.keyValue[e.which]] = true;
   });
 
   window.addEventListener("keyup", e => {
