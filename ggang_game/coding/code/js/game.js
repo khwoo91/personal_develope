@@ -25,12 +25,22 @@ const bulletComProp = {
 const gameProp = {
   screenWidth: window.innerWidth,
   screenHeight: window.innerHeight,
-  gameOver : false
+  gameOver: false
 };
 
 const gameBackground = {
   gameBox: document.querySelector('.game')
 };
+
+const stageInfo = {
+  stage: [],
+  totalScore: 0,
+  monster: [
+    {defaultMon : greenMon, bossMon: greenMonBoss},
+    {defaultMon : yellowMon, bossMon: yellowMonBoss},
+    {defaultMon : pinkMon, bossMon: pinkMonBoss},
+  ],
+}
 
 const renderGame = () => {
   hero.keyMotion();
@@ -43,10 +53,11 @@ const renderGame = () => {
     arr.moveMonster();
   })
 
+  stageInfo.stage.clearCheck();
   window.requestAnimationFrame(renderGame);
 };
 
-const endGame = () =>{
+const endGame = () => {
   gameProp.gameOver = true;
   key.keyDown.left = false;
   key.keyDown.right = false;
@@ -60,7 +71,7 @@ const setGameBackground = () => {
 
 const windowEvent = () => {
   window.addEventListener('keydown', e => {
-    if(!gameProp.gameOver) key.keyDown[key.keyValue[e.which]] = true;
+    if (!gameProp.gameOver) key.keyDown[key.keyValue[e.which]] = true;
   });
 
   window.addEventListener("keyup", e => {
@@ -89,12 +100,13 @@ let hero;
 
 const init = () => {
   hero = new Hero('.hero');
-  allMonsterComProp.arr[0] = new Monster(700, 7777);
-  allMonsterComProp.arr[1] = new Monster(1500, 5555);
+  stageInfo.stage = new Stage();
+
+
+
   loadImg();
   windowEvent();
   renderGame();
-  console.log(hero.position());
 };
 
 window.onload = () => {
