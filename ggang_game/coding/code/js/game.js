@@ -5,6 +5,7 @@ const key = {
     37: 'left',
     39: 'right',
     88: 'attack',
+    67: 'slide',
   }
 };
 
@@ -40,6 +41,7 @@ const stageInfo = {
     {defaultMon : yellowMon, bossMon: yellowMonBoss},
     {defaultMon : pinkMon, bossMon: pinkMonBoss},
   ],
+  callPosition: [1000, 5000, 9000]
 }
 
 const renderGame = () => {
