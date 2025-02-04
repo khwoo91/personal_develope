@@ -6,6 +6,7 @@ const key = {
     39: 'right',
     88: 'attack',
     67: 'slide',
+    13: 'enter',
   }
 };
 
@@ -40,13 +41,19 @@ const stageInfo = {
     {defaultMon : greenMon, bossMon: greenMonBoss},
     {defaultMon : yellowMon, bossMon: yellowMonBoss},
     {defaultMon : pinkMon, bossMon: pinkMonBoss},
+    {defaultMon : pinkMon, bossMon: zombieKing},
   ],
-  callPosition: [1000, 5000, 9000]
+  callPosition: [1000, 5000, 9000, 12000]
 }
 
 const renderGame = () => {
   hero.keyMotion();
   setGameBackground();
+
+  npcOne.crash();
+  npcTwo.crash();
+
+
 
   bulletComProp.arr.forEach((arr, i) => {
     arr.moveBullet();
@@ -74,6 +81,8 @@ const setGameBackground = () => {
 const windowEvent = () => {
   window.addEventListener('keydown', e => {
     if (!gameProp.gameOver) key.keyDown[key.keyValue[e.which]] = true;
+    if(key.keyDown['enter']) { npcOne.talk(); npcTwo.talk(); }
+    // console.log(e.which);
   });
 
   window.addEventListener("keyup", e => {
@@ -89,7 +98,8 @@ const windowEvent = () => {
 const loadImg = () => {
   const preLoadImgSrc = [
     '../../lib/images/ninja_attack.png',
-    '../../lib/images/ninja_run.png'
+    '../../lib/images/ninja_run.png',
+    '../../lib/images/ninja_slide.png',
   ]
   preLoadImgSrc.forEach(arr => {
     const img = new Image();
@@ -98,14 +108,17 @@ const loadImg = () => {
 };
 
 
+
+
 let hero;
+let npcOne;
 
 const init = () => {
   hero = new Hero('.hero');
   stageInfo.stage = new Stage();
-
-
-
+  npcOne = new Npc(levelQuest);
+  npcTwo = new Npc(levelQuestTwo);
+  
   loadImg();
   windowEvent();
   renderGame();

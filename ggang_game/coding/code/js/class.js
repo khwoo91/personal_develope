@@ -1,3 +1,56 @@
+class Npc {
+  constructor(property) {
+    this.property = property;
+    this.parentNode = document.querySelector('.game');
+    this.el = document.createElement('div');
+    this.el.className = 'npc_box';
+    this.npcCrash = false;
+    this.talkOn = false;
+    this.modal = document.querySelector('.quest_modal');
+    this.questStart = false;
+    this.questEnd = false;
+
+    this.init();
+  }
+  init() {
+    let npcTalk = '';
+    npcTalk += '<div class="talk_box">'
+    npcTalk += this.property.idleMessage;
+    npcTalk += '</div>'
+    npcTalk += '<div class="npc"></div>'
+
+    this.el.innerHTML = npcTalk;
+    this.el.style.left = this.property.positionX + 'px';
+    this.parentNode.append(this.el);
+  }
+  position() {
+    return {
+      left: this.el.getBoundingClientRect().left,
+      right: this.el.getBoundingClientRect().right,
+      top: gameProp.screenHeight - this.el.getBoundingClientRect().top,
+      bottom: gameProp.screenHeight - this.el.getBoundingClientRect().top - this.el.getBoundingClientRect().height
+    }
+  }
+  crash() {
+    if (hero.position().right > this.position().left && hero.position().left < this.position().right) {
+      this.npcCrash = true;
+    } else {
+      this.npcCrash = false;
+    }
+  }
+  talk() {
+    if (!this.talkOn && this.npcCrash) {
+      this.talkOn = true;
+      this.property.quest();
+      this.modal.classList.add('active');
+    } else if (this.talkOn) {
+      this.talkOn = false;
+      this.modal.classList.remove('active');
+    }
+  }
+}
+
+
 class Stage {
   constructor() {
     this.level = 0;
@@ -5,13 +58,13 @@ class Stage {
     // this.stageStart();
   }
 
-  // stageStart() {
-  //   setTimeout(() => {
-  //     this.isStart = true;
-  //     this.stageGuide(`START LEVEL ${this.level + 1}`);
-  //     this.callMonster();
-  //   }, 2000)
-  // }
+  stageStart() {
+    setTimeout(() => {
+      this.isStart = true;
+      this.stageGuide(`START LEVEL ${this.level + 1}`);
+      this.callMonster();
+    }, 2000)
+  }
 
   stageGuide(text) {
     this.parentNode = document.querySelector('.game_app');
@@ -35,30 +88,17 @@ class Stage {
   }
 
   clearCheck() {
-    stageInfo.callPosition.forEach( arr =>{
+    stageInfo.callPosition.forEach(arr => {
       if (hero.moveX >= arr && allMonsterComProp.arr.length === 0) {
         this.stageGuide('곧 몬스터가 몰려옵니다!');
         stageInfo.callPosition.shift();
-        setTimeout(()=> {
+        setTimeout(() => {
           this.callMonster();
           this.level++;
         }, 1000)
         console.log(arr);
       }
     })
-
-    // if (allMonsterComProp.arr.length === 0 && this.isStart) {
-    //   this.isStart = false;
-    //   this.level++;
-
-    //   if (this.level < stageInfo.monster.length) {
-    //     this.stageGuide('CLEAR!!');
-    //     this.stageStart();
-    //     hero.heroUpgrade();
-    //   } else {
-    //     this.stageGuide('ALL CLEAR!!');
-    //   }
-    // }
   }
 }
 
@@ -114,7 +154,7 @@ class Hero {
         if (this.direction === 'right') {
           this.moveX = this.moveX + this.slideSpeed;
         } else {
-          this.moveX = this.moveX - this.slideSpeed;
+          this.moveX = this.moveX <= 0 ? 0 : this.moveX - this.slideSpeed;
         }
 
         if (this.slideTime > this.slideMaxTime) {
@@ -185,14 +225,15 @@ class Hero {
   hitDamage() {
     this.realDamage = this.attackDamage - Math.round(Math.random() * this.attackDamage * 0.1);
   }
-  heroUpgrade() {
-    this.attackDamage += 5000;
+  heroUpgrade(upDamage) {
+    let damage = upDamage ?? 5000;
+    this.attackDamage += damage;
   }
   updateExp(exp) {
     this.exp += exp;
     this.expProgress = this.exp / this.maxExp * 100;
     document.querySelector('.hero_state .exp span').style.width = this.expProgress + '%';
-    
+
     if (this.exp >= this.maxExp) {
       this.levelUp();
     }

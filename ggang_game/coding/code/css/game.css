@@ -128,6 +128,55 @@
 }
 
 
+
+.quest_modal {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 200;
+}
+.quest_modal.active { display: block;}
+.quest_modal .inner_box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  padding: 40px 10px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 10px solid #8793eb;
+  border-radius: 10px;
+  z-index: 10;
+}
+.quest_modal .inner_box .close {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  color: #bf0000;
+}
+.quest_talk .npc_img {
+  float: left;
+  width: 10%;
+}
+.quest_talk p {
+  float: left;
+  width: 90%;
+  padding-left: 20px;
+  color: #222;
+  font-size: 20px;
+}
+.quest_talk p span {color: red;}
+
+
+
+
+
+
 @keyframes stageStart {
   0% { opacity: 1;}
   80% { opacity: 1;}
@@ -310,6 +359,21 @@
 .monster_box.pink_mon .monster{background-image: url(../../../lib/images/monster/monster_pink_run.png);}
 
 
+@keyframes zombie_king_run {
+  from {background-position-x: 0px;}
+  to {background-position-x: -4300px;}
+}
+
+.monster_box.zombie_king {
+  width: 430px;
+  height: 519px;
+
+}
+.monster_box.zombie_king .monster {
+  background-image: url(../../../lib/images/monster/zombie_run.png);;
+  background-size: 4300px 519px;
+  animation: zombie_king_run 1s infinite steps(10);
+}
 
 
 @keyframes monster_run_boss {
@@ -370,4 +434,42 @@
   -webkit-background-clip: text;
   animation: textDamage 0.5s ease-out;
   animation-fill-mode: both;
+}
+
+
+@keyframes npc_idle {
+  0%{ background-position-x: 0px; }
+  100%{ background-position-x: -1498px; }
+}
+
+.npc_box {
+  position: absolute;
+  left: 400px;
+  bottom: 0;
+  width: 150px;
+  height: 182px;
+  z-index: 90;
+}
+.npc_box .npc {
+  height: 100%;
+  background-image: url(../../../lib/images/robot_idle.png);
+  background-size: 1498px 182px;
+  animation: npc_idle 0.7s infinite steps(10);
+}
+.npc_box .talk_box {
+  position: absolute;
+  left: 60px;
+  bottom: 105%;
+  width: 150px;
+  background-color: #f1f1f1;
+  border: 2px solid #555;
+  border-radius: 20px;
+  color: #222;
+}
+.npc_box .talk_box p {padding: 10px;}
+.npc_box .talk_box p span {
+  display: block;
+  color: #bf0000;
+  text-align: right;
+  font-size: 14px;
 }
