@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>알고리즘 연습장</title>
+</head>
+
+<body>
+  <script>
+    function solution(nums) {
+      let answer = nums;
+      for (let i of nums) {
+        nums.splice(3, 4);
+      }
+      return answer;
+    }
+    let nums = [100, 200, 300, 400, 500];
+    console.log(solution(nums));
+  </script>
+</body>
+
+</html>
