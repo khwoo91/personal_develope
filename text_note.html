@@ -11,12 +11,11 @@
   <script>
     function solution(nums) {
       let answer = nums;
-      for (let i of nums) {
-        nums.splice(3, 4);
-      }
+      let s = 1000;
+      nums.push(s);
       return answer;
     }
-    let nums = [100, 200, 300, 400, 500];
+    let nums = [200, 100, 300];
     console.log(solution(nums));
   </script>
 </body>
