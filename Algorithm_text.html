@@ -9,15 +9,16 @@
 
 <body style="background-color: #262627;">
   <script>
-    function solution(nums) {
-      let answer = nums;
-      nums.splice(2, 0, 1000);
-
+    function solution(number, n, m) {
+      var answer = 0;
+      if (number%n === 0 && number%m === 0) answer = 1;
+      
       return answer;
     }
 
-    let nums = [100, 200, 300];
-    console.log(solution(nums));
+    // console.log(solution(60, 2, 3));
+    console.log(solution(55, 10, 5));
+    
   </script>
 </body>
 
