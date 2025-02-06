@@ -4,22 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>알고리즘 연습장</title>
+  <title>Algorithm</title>
 </head>
 
-<body>
+<body style="background-color: #262627;">
   <script>
     function solution(nums) {
-      let answer, min= Number.MAX_SAFE_INTEGER;
-      for (let i = 0; i < nums.length; i++) {
-        if(nums[i]<min) min = nums[i];
-      }
-      answer = min
+      let answer = nums;
+      nums.splice(2, 0, 1000);
+
       return answer;
     }
-    let nums = [5, 3, 7, 11, 2, 15, 17];
+
+    let nums = [100, 200, 300];
     console.log(solution(nums));
-    // console.log(solution(13, 33, 17));
   </script>
 </body>
 
