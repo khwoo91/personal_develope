@@ -1,13 +1,12 @@
 {
-    "name": "phaser",
+    "name": "template-webpack",
     "version": "3.2.1",
     "main": "src/main.js",
     "scripts": {
         "dev": "node log.js dev & webpack-dev-server --config webpack/config.js --open",
         "build": "node log.js build & webpack --config webpack/config.prod.js",
         "dev-nolog": "webpack-dev-server --config webpack/config.js --open",
-        "build-nolog": "webpack --config webpack/config.prod.js",
-        "start": "node index.html"
+        "build-nolog": "webpack --config webpack/config.prod.js"
     },
     "repository": {
         "type": "git",
