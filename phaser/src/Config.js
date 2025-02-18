@@ -13,7 +13,7 @@ const Config = {
     physics: {
         default: "arcade",
         arcade: {
-            // debug: process.env.DEBUG === "true"
+            debug: process.env.DEBUG === "true"
         },
     },
 };

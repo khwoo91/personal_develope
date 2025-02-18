@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import Player from "../characters/Player";
 import Config from "../Config"
 import { setBackground } from "../utils/backgroundManager";
-import { addMobEvent } from "../utils/mobManager";
+import { addMobEvent } from "../utils/mobManager"
 
 export default class PlayingScene extends Phaser.Scene {
     constructor() {
@@ -24,24 +24,30 @@ export default class PlayingScene extends Phaser.Scene {
         this.m_pauseInSound = this.sound.add("audio_pauseIn");
         this.m_pauseOutSound = this.sound.add("audio_pauseOut");
 
+
         this.m_player = new Player(this);
+
         this.cameras.main.startFollow(this.m_player);
+
         setBackground(this, "background1");
+
         this.m_cursorKeys = this.input.keyboard.createCursorKeys();
 
         this.m_mobs = this.physics.add.group();
         this.m_mobEvents = [];
-        // scene, repeatGap, mobTexture, mobAnim, mobHp, mobDropRate
-        addMobEvent(this, 1000, "mob1", "mob1_anim", 10, 0.9);
 
+        //scene, repeatGap, mobTexture, mobAnim, mobHp, mobDropRate
+        addMobEvent(this, 1000, "mob1", "mob1_anim", 10, 0.9);
     }
+
     update() {
         this.movePlayerManager();
+
         this.m_background.setX(this.m_player.x - Config.width / 2);
         this.m_background.setY(this.m_player.y - Config.height / 2);
 
-        this.m_background.tilePositionX = this.m_player.x - Config.width / 2;
-        this.m_background.tilePositionY = this.m_player.y - Config.width / 2;
+        this.m_background.tilePositionX = this.m_player.x - Config.width / 2
+        this.m_background.tilePositionY = this.m_player.y - Config.width / 2
     }
 
     movePlayerManager() {
@@ -60,17 +66,17 @@ export default class PlayingScene extends Phaser.Scene {
         let vector = [0, 0];
         if (this.m_cursorKeys.left.isDown) {
             vector[0] += -1;
-        }
-        else if (this.m_cursorKeys.right.isDown) {
+        } else if (this.m_cursorKeys.right.isDown) {
             vector[0] += 1;
         }
+
         if (this.m_cursorKeys.up.isDown) {
             vector[1] += -1;
-        }
-        else if (this.m_cursorKeys.down.isDown) {
+        } else if (this.m_cursorKeys.down.isDown) {
             vector[1] += 1;
         }
 
         this.m_player.move(vector);
     }
+
 }

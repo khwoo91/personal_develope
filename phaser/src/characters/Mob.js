@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 
 export default class Mob extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, texture, animKey, iniHp, dropRate) {
+  constructor(scene, x, y, texture, animKey, initHp, dropRate) {
     super(scene, x, y, texture);
 
     scene.add.existing(this);
@@ -11,7 +11,7 @@ export default class Mob extends Phaser.Physics.Arcade.Sprite {
     this.setDepth(10);
     this.scale = 2;
     this.m_speed = 50;
-    this.m_hp = iniHp;
+    this.m_hp = initHp;
     this.m_dropRate = dropRate;
 
     if (texture === 'mob1') {
@@ -30,7 +30,6 @@ export default class Mob extends Phaser.Physics.Arcade.Sprite {
     if (texture === 'lion') {
       this.setBodySize(40, 64);
     }
-
     this.m_events = [];
     this.m_events.push(
       this.scene.time.addEvent({
