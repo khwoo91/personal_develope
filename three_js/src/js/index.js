@@ -1,46 +1,59 @@
 import * as THREE from "three";
+import { OrbitControls } from "OrbitControls";
+
 
 document.body.style.margin = '0';
 document.body.style.overflow = 'hidden';
-
-console.log(THREE);
 
 
 // 장면 생성
 const scene = new THREE.Scene();
 scene.background = null;
 
-const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(2, 2, 2);
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(5, 5, 5);
 camera.lookAt(0, 0, 0);
 
 const renderer = new THREE.WebGLRenderer({
-    alpha: true
+  alpha: true
 })
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// 빛
-const ambientLight = new THREE.AmbientLight(0xffffff, 3);
-scene.add(ambientLight);
+const light = new THREE.DirectionalLight(0xffffff);
+light.position.set(2, 4, 3);
+scene.add(light);
 
-const pointLight = new THREE.PointLight(0xffffff, 50);
-pointLight.position.set(0, 2, 4);
-scene.add(pointLight);
 
-// 박스
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshStandardMaterial({ color: 0x2E6FF2 })
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+// OrbitControls 카메라 회전
+const controls = new OrbitControls(camera, renderer.domElement);
+// controls.minDistance = 2;
+// controls.maxDistance = 10;
+// controls.maxPolarAngle = Math.PI / 3;
 
-renderer.render(scene, camera);
+controls.enableDamping = true;
+// controls.autoRotate = true;
+// controls.autoRotateSpeed = 5;
 
-// 창 크기 조절
-const onWindowResize = () => {
+
+
+
+
+const axesHelper = new THREE.AxesHelper(10);
+scene.add(axesHelper);
+
+
+
+function animate() {
+  renderer.render(scene, camera);
+  controls.update();
+  requestAnimationFrame(animate);
+}
+animate();
+
+
+window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.render(scene, camera);
-}
-window.addEventListener('resize', onWindowResize);
+})
