@@ -29,10 +29,11 @@ const controls = new OrbitControls(camera, renderer.domElement);
 // controls.minDistance = 2;
 // controls.maxDistance = 10;
 // controls.maxPolarAngle = Math.PI / 3;
-
-controls.enableDamping = true;
+// controls.enableZoom = false;
+// controls.enableRotate = false;
 // controls.autoRotate = true;
-// controls.autoRotateSpeed = 5;
+// controls.autoRotateSpeed = 3;
+controls.enableDamping = true;
 
 
 const sphereGeo = new THREE.SphereGeometry(1);

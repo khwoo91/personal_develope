@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>자주 쓰는 메서드 정리</title>
+</head>
+
+<body>
+ <script>
+  const arr = [1, 2, 3, 4, 5];
+  const arr2 = ["num_1", "num_2", "num_3", "num_4", "num_5", "n_6"];
+  const text = "Hello World";
+
+  // ★★★★★★★ 문자열 메서드 ★★★★★★★
+  // 문자열 관련 검색: indexOf(), includes(), charAt(), startsWith(), endsWith()
+  // - indexOf: 문자열에서 지정한 값이 처음 등장하는 위치를 반환
+  const indexOf = text.indexOf("o");
+  // console.log("indexOf:", indexOf);
+
+  // - includes: 문자열에서 지정한 값이 포함되어 있는지 확인 
+  const includes = text.includes("o");
+  // console.log("includes:", includes);
+
+  // - charAt: 문자열에서 지정한 위치의 문자를 반환
+  const charAt = text.charAt(0);
+  // console.log("charAt:", charAt);
+
+  // - startsWith: 문자열이 지정한 값으로 시작하는지 확인
+  // - endsWith: 문자열이 지정한 값으로 끝나는지 확인
+
+  // 문자열을 변환: toUpperCase(), toLowerCase(), replace(), trim()
+  // - toUpperCase: 문자열을 대문자로 변환
+  // - toLowerCase: 문자열을 소문자로 변환
+  // - replace: 문자열에서 지정한 값을 찾아 다른 값으로 변환
+  const replace = text.replace("Hello", "Hi");
+  // console.log("replace:", replace);
+
+  // - trim: 문자열의 양쪽 공백을 제거
+
+  // 자르기 및 구분하기: slice(), split()
+  // - slice: 문자열을 지정한 위치에서 잘라서 반환
+  const slice = text.slice(0, 5);
+  // console.log("slice:", slice);
+
+  // - split: 문자열을 지정한 값으로 구분하여 배열로 반환
+  const split = text.split(" ");
+  // console.log("split:", split);
+
+  // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+  // ★★★★★★★ 배열 변환 메서드 ★★★★★★★  
+  // - push: 배열의 끝에 하나 이상의 요소 추가
+  const push = [1, 2].push(3);
+  // console.log("push:", push);
+
+  // - pop: 배열의 마지막 요소 제거하고 반환 
+  const pop = [1, 2, 3].pop();
+  // console.log("pop:", pop);
+
+  // - shift: 배열의 첫 번째 요소 제거하고 반환
+  const shift = [1, 2, 3].shift();
+  // console.log("shift:", shift);
+
+  // - unshift: 배열의 앞에 하나 이상의 요소 추가
+  const unshift = [1, 2].unshift(0);
+  // console.log("unshift:", unshift);
+
+  // - splice: 배열의 중간에 요소 추가 또는 삭제
+  const splice = [1, 2, 3].splice(1, 1, 4);
+  // console.log("splice:", splice);
+
+  // - concat: 배열을 결합하여 새로운 배열 반환
+  const concat = [1, 2].concat([3, 4]);
+  // console.log("concat:", concat);
+
+  // - join: 배열의 모든 요소를 하나의 문자열로 결합
+  const join = [1, 2, 3].join('-');
+  // console.log("join:", join);
+
+  // - sort: 배열의 요소를 정렬
+  const sort = [3, 1, 2].sort();
+  // console.log("sort:", sort);
+
+  // - reverse: 배열의 순서를 반대로 변경
+  const reverse = [1, 2, 3].reverse();
+  // console.log("reverse:", reverse);
+
+  // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+  // ★★★★★★★ 배열 탐색? 메서드 ★★★★★★★
+  // - forEach : 각 요소에 대해 함수 실행  
+  arr.forEach(function (e) {
+   // console.log("forEach:", e);
+  });
+
+  // - map : 각 요소에 대해 함수 실행 후 새로운 배열 반환
+  const newArr = arr.map(function (item) {
+   return item * 2;
+  });
+  // console.log("map:", newArr);
+
+  // - filter : 조건에 맞는 요소만 추출
+  const filteredArr = arr.filter(item => item % 2 === 0); // 수학 공식은.. 항상 검색해보자.. 어려워..
+  // console.log("filter:", filteredArr);
+  // 응용 - 1
+  const filteredArr1 = arr2.filter(item => item.startsWith('num_')).map(item => item.split('_')[1]);
+  // console.log("filter:", filteredArr1);
+
+  // - find : 조건에 맞는 첫 번째 요소 반환
+  const foundItem1 = arr2.find(item => item.startsWith("num_"));
+  // console.log("find:", foundItem1);
+
+  // - findIndex : 조건에 맞는 첫 번째 요소의 인덱스 반환
+  const foundIndex = arr2.findIndex(item => item.startsWith("num_"));
+  // console.log("findIndex:", foundIndex);
+
+  // - some : 조건에 맞는 요소가 하나라도 있는지 확인
+  const hasEven = arr2.some(item => item.includes('u'));
+  console.log("some:", hasEven);
+
+  // - every : 모든 요소가 조건에 맞는지 확인
+  const allEven = arr2.every(item => item.startsWith('num_'));
+  // console.log("every:", allEven);
+
+ </script>
+
+</body>
+
+</html>
