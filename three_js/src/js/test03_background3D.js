@@ -38,13 +38,12 @@ document.body.appendChild(renderer.domElement)
 directionalLight.position.set(-1, 2, 4);
 directionalLight.target.position.set(0, -1, 0);
 
-function animate() {
+const animate = () => {
   renderer.render(scene, camera);
   orbit.update();
   requestAnimationFrame(animate);
 };
 animate();
-
 
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
