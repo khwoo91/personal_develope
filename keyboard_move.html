@@ -36,7 +36,7 @@
       background-color: #fff;
     }
 
-    .game_wrap .game_map .player{
+    .game_wrap .game_map .player {
       position: absolute;
       width: 50px;
       height: 50px;
@@ -52,14 +52,34 @@
     </div>
   </div>
   <script>
-
-    class player {
+    class Player {
       constructor(rootNode) {
-        this.player = document.querySelector('rooteNode');
+        this.player = document.querySelector(rootNode);
+        this.moveX = 0;
+        this.speed = 10;
       }
 
       keyMove() {
+        console.log(key.keyDown['up'], key.keyDown['down'], key.keyDown['left'], key.keyDown['right']);
 
+        if (key.keyDown['up']) {
+          this.player.classList.add('up')
+        }
+
+        else if (key.keyDown['down']) {
+          this.player.classList.add('down')
+        }
+
+        else if (key.keyDown['left']) {
+          this.player.classList.add('left')
+        }
+
+        else if (key.keyDown['right']) {
+          this.player.classList.add('right')
+        }
+
+
+        this.player.style.trasform = `translate(${this.moveX}, ${this.moveX})`;
       }
 
       position() {
@@ -67,7 +87,42 @@
       }
     }
 
-    const Player = new player('.game_wrap .player')
+
+    const key = {
+      keyDown: {},
+      keyValue: {
+        37: 'left',
+        38: 'up',
+        39: 'right',
+        40: 'down',
+        13: 'enter',
+      },
+    }
+
+
+    const renderGame = () => {
+      player.keyMove();
+      window.requestAnimationFrame(renderGame);
+    }
+
+    const windowEvent = () => {
+      window.addEventListener('keydown', (e) => {
+        // console.log(e.keyCode);
+      })
+      window.addEventListener('keyup', (e) => {
+        // console.log(e.keyCode);
+      })
+      window.addEventListener('resize', (e) => {
+        // console.log(e.keyCode);
+      })
+    }
+
+
+    window.onload = () => {
+      const player = new Player('.player');
+      windowEvent();
+      renderGame();
+    }
 
   </script>
 </body>
