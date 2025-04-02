@@ -60,8 +60,6 @@
       }
 
       keyMove() {
-        console.log(key.keyDown['up'], key.keyDown['down'], key.keyDown['left'], key.keyDown['right']);
-
         if (key.keyDown['up']) {
           this.player.classList.add('up')
         }
@@ -77,7 +75,6 @@
         else if (key.keyDown['right']) {
           this.player.classList.add('right')
         }
-
 
         this.player.style.trasform = `translate(${this.moveX}, ${this.moveX})`;
       }
@@ -98,6 +95,8 @@
         13: 'enter',
       },
     }
+    // console.log(key.keyDown[key.keyValue[e.keyCode]]);
+    // console.log(key.keyValue[37]);
 
 
     const renderGame = () => {
@@ -107,22 +106,28 @@
 
     const windowEvent = () => {
       window.addEventListener('keydown', (e) => {
-        // console.log(e.keyCode);
+        key.keyDown[key.keyValue[e.keyCode]] = true;
+        console.log(key.keyDown);
+
       })
       window.addEventListener('keyup', (e) => {
-        // console.log(e.keyCode);
+        key.keyDown[key.keyValue[e.keyCode]] = false;
+        console.log(key.keyDown);
       })
       window.addEventListener('resize', (e) => {
         // console.log(e);
       })
     }
 
-
-    window.onload = () => {
-      const player = new Player('.player');
-      windowEvent();
+    let player;
+    
+    const init = () => {
+      player = new Player('.player');
       renderGame();
+      windowEvent();
     }
+
+    window.onload = () => { init(); }
 
   </script>
 </body>
