@@ -95,9 +95,6 @@
         13: 'enter',
       },
     }
-    // console.log(key.keyDown[key.keyValue[e.keyCode]]);
-    // console.log(key.keyValue[37]);
-
 
     const renderGame = () => {
       player.keyMove();
@@ -120,7 +117,7 @@
     }
 
     let player;
-    
+
     const init = () => {
       player = new Player('.player');
       renderGame();
