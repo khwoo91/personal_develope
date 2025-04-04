@@ -55,44 +55,58 @@
     class Player {
       constructor(rootNode) {
         this.player = document.querySelector(rootNode);
-        this.moveX = 0;
-        this.speed = 10;
+        this.map = this.player.parentNode;
+        this.moveX = this.moveY = 0;
+        this.speed = 5;
+        this.map_size = this.map.getBoundingClientRect();
       }
 
       keyMove() {
         if (key.keyDown['up']) {
-          this.player.classList.add('up')
+          console.log('# Up', this.moveY);
+          this.moveY = this.moveY <= 0 ? 0 : this.moveY - this.speed;
         }
 
-        else if (key.keyDown['down']) {
-          this.player.classList.add('down')
+        if (key.keyDown['down']) {
+          console.log('# Down', this.moveY);
+          this.moveY = this.map_size.height - this.position().bottom <= this.moveY ? this.moveY : this.moveY + this.speed;
         }
 
-        else if (key.keyDown['left']) {
-          this.player.classList.add('left')
+        if (key.keyDown['left']) {
+          console.log('# Left', this.moveX);
+          this.moveX = this.moveX <= 0 ? 0 : this.moveX - this.speed;
         }
 
-        else if (key.keyDown['right']) {
-          this.player.classList.add('right')
+        if (key.keyDown['right']) {
+          console.log('# Right', this.moveX);
+          this.moveX = this.map_size.width - this.position().right <= this.moveX ? this.moveX : this.moveX + this.speed;
         }
 
-        this.player.style.trasform = `translate(${this.moveX}, ${this.moveX})`;
+        if (key.keyDown['enter']) {
+          console.log('# Enter');
+        }
+
+        this.player.style.transform = `translate(${this.moveX}px, ${this.moveY}px)`;
       }
 
       position() {
-
+        return {
+          top: this.player.getBoundingClientRect().top,
+          left: this.player.getBoundingClientRect().left,
+          right: this.player.getBoundingClientRect().width,
+          bottom: this.player.getBoundingClientRect().height,
+        }
       }
     }
-
 
     const key = {
       keyDown: {},
       keyValue: {
+        13: 'enter',
         37: 'left',
         38: 'up',
         39: 'right',
         40: 'down',
-        13: 'enter',
       },
     }
 
@@ -104,27 +118,23 @@
     const windowEvent = () => {
       window.addEventListener('keydown', (e) => {
         key.keyDown[key.keyValue[e.keyCode]] = true;
-        console.log(key.keyDown);
-
       })
       window.addEventListener('keyup', (e) => {
         key.keyDown[key.keyValue[e.keyCode]] = false;
-        console.log(key.keyDown);
       })
       window.addEventListener('resize', (e) => {
-        // console.log(e);
+
       })
     }
 
+
     let player;
 
-    const init = () => {
+    window.onload = () => {
       player = new Player('.player');
       renderGame();
       windowEvent();
     }
-
-    window.onload = () => { init(); }
 
   </script>
 </body>
