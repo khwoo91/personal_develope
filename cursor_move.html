@@ -11,6 +11,7 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       position: relative;
       margin: 0 auto;
@@ -21,6 +22,7 @@
       cursor: none;
       outline: 1px solid red;
     }
+
     .cursor {
       position: absolute;
       top: 0;
@@ -30,7 +32,7 @@
       background-color: #fff;
     }
 
-    .mouse_wrap{
+    .mouse_wrap {
       position: absolute;
       bottom: 0;
       font-size: 30px;
@@ -58,17 +60,6 @@
       mouse_Y.innerHTML = `Y : ${e.clientY}px`;
       mouse_X.innerHTML = `X : ${e.clientX}px`;
     });
-
-    // function solution(number, n, m) {
-    //   var answer = 0;
-    //   if (number%n === 0 && number%m === 0) answer = 1;
-      
-    //   return answer;
-    // }
-
-    // // console.log(solution(60, 2, 3));
-    // console.log(solution(55, 10, 5));
-    
   </script>
 </body>
 
